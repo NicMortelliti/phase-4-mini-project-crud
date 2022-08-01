@@ -22,7 +22,9 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   # DELETE /spices/:id
   def destroy
-
+    spice = find_spice
+    spice.destroy
+    head :no_content
   end
 
   # Private methods
