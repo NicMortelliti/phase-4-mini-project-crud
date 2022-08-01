@@ -14,15 +14,26 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   end
 
   # PATCH /spices/:id
-
+  def update
+    spice = find_spice
+    spice.update(spice_params)
+    render json: spice
+  end
 
   # DELETE /spices/:id
+  def destroy
+
+  end
 
   # Private methods
   private 
 
   def spice_params
     params.permit(:title, :image, :description, :notes, :rating)
+  end
+
+  def find_spice
+    Spice.find(params[:id])
   end
 
   def render_not_found_response
